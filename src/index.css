@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== 全局基础样式 ===== */
+:root {
+  font-family: 'JetBrains Mono', 'Microsoft YaHei', monospace;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #0F172A;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ===== 赛博朋克背景网格效果 ===== */
+.cyber-grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ===== 霓虹光效 ===== */
+.neon-text-yellow {
+  text-shadow: 0 0 8px rgba(255, 230, 0, 0.7), 0 0 16px rgba(255, 230, 0, 0.4);
+}
+.neon-text-blue {
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.7), 0 0 16px rgba(0, 240, 255, 0.4);
+}
+.neon-text-red {
+  text-shadow: 0 0 8px rgba(255, 0, 85, 0.7), 0 0 16px rgba(255, 0, 85, 0.4);
+}
+.neon-text-purple {
+  text-shadow: 0 0 8px rgba(176, 38, 255, 0.7), 0 0 16px rgba(176, 38, 255, 0.4);
+}
+
+/* ===== 自定义滚动条 ===== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1E293B;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ===== 玻璃态卡片 ===== */
+.glass-card {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+}
+
+/* ===== 弹窗遮罩 ===== */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+/* ===== 棋盘格子悬浮效果 ===== */
+.tile-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tile-hover:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+/* ===== 按钮通用样式 ===== */
+.btn-cyber {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+.btn-cyber:hover::before {
+  left: 100%;
+}
+
+/* ===== 粒子动画 ===== */
+@keyframes particle-float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) scale(0);
+    opacity: 0;
+  }
+}
+.particle {
+  animation: particle-float 2s ease-out forwards;
+}
+
+/* ===== 心跳脉冲（倒计时最后3秒） ===== */
+@keyframes heartbeat-pulse {
+  0%, 100% { text-shadow: 0 0 8px rgba(255, 0, 85, 0.7), 0 0 16px rgba(255, 0, 85, 0.4); }
+  50% { text-shadow: 0 0 20px rgba(255, 0, 85, 1), 0 0 40px rgba(255, 0, 85, 0.8), 0 0 60px rgba(255, 0, 85, 0.3); }
+}
+.animate-heartbeat-pulse {
+  animation: heartbeat-pulse 0.5s ease-in-out infinite;
+}
+
+/* ===== Ken Burns 效果：图片缓慢缩放平移 ===== */
+@keyframes ken-burns-a {
+  0%   { transform: scale(1) translate(0%, 0%); }
+  50%  { transform: scale(1.12) translate(-2%, -1.5%); }
+  100% { transform: scale(1.08) translate(1.5%, 1%); }
+}
+@keyframes ken-burns-b {
+  0%   { transform: scale(1.05) translate(1%, -1%); }
+  50%  { transform: scale(1.15) translate(-1.5%, 2%); }
+  100% { transform: scale(1.1) translate(2%, -1%); }
+}
+.ken-burns-a {
+  animation: ken-burns-a 8s ease-in-out infinite alternate;
+}
+.ken-burns-b {
+  animation: ken-burns-b 8s ease-in-out infinite alternate;
+}
+
+/* ===== 交叉淡入模糊 ===== */
+@keyframes blur-in {
+  0%   { filter: blur(12px); opacity: 0; }
+  60%  { filter: blur(4px); opacity: 0.7; }
+  100% { filter: blur(0); opacity: 1; }
+}
+.blur-in {
+  animation: blur-in 0.4s ease-out forwards;
+}
+
+/* ===== 媒体切换淡入（无叠加，直接替换后淡入） ===== */
+@keyframes media-fade-in {
+  0%   { opacity: 0; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.media-fade-in {
+  animation: media-fade-in 0.3s ease-out forwards;
+}
+
+/* ===== 无障碍：减少动画 ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
